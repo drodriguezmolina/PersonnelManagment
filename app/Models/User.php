@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'role_id',
         'name',
         'email',
         'password',
@@ -41,4 +42,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin(): bool
+    {
+        return $this['role_id'] === 1;
+    }
+
+    public function isJournalist(): bool
+    {
+        return $this['role_id'] === 2;
+    }
+
+    public function isParticipant(): bool
+    {
+        return $this['role_id'] === 3;
+    }
+
+    public function isJudge(): bool
+    {
+        return $this['role_id'] === 4;
+    }
 }
